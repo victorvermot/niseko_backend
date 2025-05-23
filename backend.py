@@ -165,7 +165,10 @@ def get_cooperative_players_with_details():
                 })
     return jsonify(players)
 
-if __name__ == "__main__":
-    init_db()
-    print_all_characters()
-    app.run(port=5000)
+
+with app.app_context():
+    try:
+        init_db()
+        print("✅ Database initialized.")
+    except Exception as e:
+        print(f"⚠️ Database init failed: {e}")

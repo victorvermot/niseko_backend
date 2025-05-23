@@ -8,8 +8,8 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: niseko-project-db
+          name: niseko_project_db
           property: connectionString
 databases:
-  - name: niseko-project-db
+  - name: niseko_project_db
     plan: free

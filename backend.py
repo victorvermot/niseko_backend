@@ -1,19 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import psycopg2
+import os
 import json
 
 app = Flask(__name__)
 CORS(app)
 
 def get_db_connection():
-    return psycopg2.connect(
-        dbname="niseko",
-        user="victor",
-        password="victor",
-        host="localhost",
-        port="5432"
-    )
+    return psycopg2.connect(os.environ['DATABASE_URL'], sslmode='require')
 
 def init_db():
     with get_db_connection() as conn:
@@ -137,7 +132,9 @@ def get_top_three_cooperative_players():
                 })
             return jsonify(players)
 
-if __name__ == "__main__":
-    init_db()
-    print_all_characters()
-    app.run(port=5000)
+with app.app_context():
+    try:
+        init_db()
+        print("✅ Database initialized.")
+    except Exception as e:
+        print(f"⚠️ Database init failed: {e}")

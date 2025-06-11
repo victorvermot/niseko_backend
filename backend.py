@@ -106,9 +106,7 @@ def get_top_three_cooperative_players():
             c.execute('''
                 SELECT 
                     cp.highest_score,
-                    c1.name AS player1_name,
                     c1.data AS player1_data,
-                    c2.name AS player2_name,
                     c2.data AS player2_data
                 FROM cooperative_players cp
                 JOIN characters c1 ON cp.player1_id = c1.id

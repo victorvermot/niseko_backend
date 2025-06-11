@@ -116,15 +116,13 @@ def get_top_three_cooperative_players():
             ''')
             results = c.fetchall()
             players = []
-            for score, p1_name, p1_data, p2_name, p2_data in results:
+            for score, p1_data, p2_data in results:
                 players.append({
                     "highest_score": score,
                     "player1": {
-                        "name": p1_name,
                         "data": p1_data
                     },
                     "player2": {
-                        "name": p2_name,
                         "data": p2_data
                     }
                 })
